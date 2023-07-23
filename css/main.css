@@ -8,8 +8,7 @@
 }
 
 @media screen and (max-width: 980px) {
-  .bookmark-bar,
-  .geolocation {
+  .bookmark-bar {
     display: none;
   }
 }
