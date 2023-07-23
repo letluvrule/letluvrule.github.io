@@ -3,6 +3,8 @@ import { API_KEY } from './config';
 const weather = document.querySelector('#weather span:first-child');
 const city = document.querySelector('#weather span:last-child');
 
+const API_KEY = '313a2ab42794f30e7117f63e5f713cad';
+
 function onGeoOk(position) {
   const lat = position.coords.latitude;
   const lon = position.coords.longitude;
