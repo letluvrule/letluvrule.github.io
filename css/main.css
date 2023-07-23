@@ -86,7 +86,7 @@ img {
 }
 .main-wrapper,
 .main-wrapper input #search-input::placeholder {
-  color: rgb(169, 169, 169);
+  color: white;
   font-size: var(--medium);
 }
 
