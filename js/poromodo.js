@@ -4,7 +4,7 @@ const startPauseButton = document.getElementById('start-pause');
 const resetButton = document.getElementById('reset');
 const successCountSpan = document.getElementById('success-count');
 
-let time = parseInt(timeIntervalsSelect.value); // Initial time in seconds
+let time = parseInt(timeIntervalsSelect.value);
 let timer;
 let isPaused = true;
 let successCount = 0;
