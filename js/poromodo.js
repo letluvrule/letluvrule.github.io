@@ -24,7 +24,7 @@ function toggleTimer() {
     startPauseButton.textContent = 'Pause';
     timer = setInterval(updateTime, 1000);
   } else {
-    startPauseButton.textContent = 'Start';
+    startPauseButton.textContent = 'Start!';
     clearInterval(timer);
   }
   isPaused = !isPaused;
@@ -36,7 +36,7 @@ function updateTime() {
     updateDisplay();
   } else {
     clearInterval(timer);
-    startPauseButton.textContent = 'Start';
+    startPauseButton.textContent = 'Start!';
     isPaused = true;
     successCount++;
     successCountSpan.textContent = successCount;
@@ -47,9 +47,8 @@ function updateTime() {
 function resetTimer() {
   clearInterval(timer);
   isPaused = true;
-  time = parseInt(timeIntervalsSelect.value); // Reset time based on selected value
-  updateDisplay();
-  startPauseButton.textContent = 'Start';
+  time = parseInt(timeIntervalsSelect.value);
+  startPauseButton.textContent = 'Start!';
 }
 
 timeIntervalsSelect.addEventListener('change', () => {
