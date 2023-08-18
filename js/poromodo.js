@@ -4,7 +4,7 @@ const startPauseButton = document.getElementById('start-pause');
 const resetButton = document.getElementById('reset');
 const successCountSpan = document.getElementById('success-count');
 
-let time = parseInt(timeIntervalsSelect.value);
+let time = parseInt(timeIntervalsSelect.value); // Initial time in seconds
 let timer;
 let isPaused = true;
 let successCount = 0;
@@ -38,7 +38,13 @@ function updateTime() {
     clearInterval(timer);
     startPauseButton.textContent = 'Start!';
     isPaused = true;
-    successCount++;
+    const now = new Date();
+    if (now.getDate() !== currentDate.getDate()) {
+      currentDate = now;
+      successCount = 0;
+    } else {
+      successCount++;
+    }
     successCountSpan.textContent = successCount;
     alert('포모도로가 마무리되었습니다.');
   }
@@ -47,7 +53,8 @@ function updateTime() {
 function resetTimer() {
   clearInterval(timer);
   isPaused = true;
-  time = parseInt(timeIntervalsSelect.value);
+  time = parseInt(timeIntervalsSelect.value); // Reset time based on selected value
+  updateDisplay();
   startPauseButton.textContent = 'Start!';
 }
 
@@ -61,4 +68,4 @@ timeIntervalsSelect.addEventListener('change', () => {
 startPauseButton.addEventListener('click', toggleTimer);
 resetButton.addEventListener('click', resetTimer);
 
-updateDisplay();
+updateDisplay(); // Initial display update
