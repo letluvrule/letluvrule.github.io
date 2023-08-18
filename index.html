@@ -11,6 +11,7 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="./css/main.css" />
+    
   </head>
   <body>
     <div class="main-container">
@@ -41,7 +42,7 @@
           <input
             id="search-input"
             autocomplete="off"
-            placeholder="검색어를 입력하세요"
+            placeholder="google 검색어를 입력하세요"
           />
         </div>
       </div>
@@ -56,11 +57,11 @@
         + 북마크
       </div>
 
-      <!-- bookmark -->
+      <!-- bookmark list -->
       <div class="bookmark-item-input-form" id="bookmark-item-input-form">
         <div class="bookmark-input">
           <div class="new-bookmark-name">
-            <div class="label">이름</div>
+            <div class="label">할일</div>
             <input id="new-bookmark-name-input" />
           </div>
           <div class="new-bookmark-url">
@@ -73,8 +74,30 @@
           <div class="add-btn" id="add-btn">추가</div>
         </div>
       </div>
-      <div class="bookmark-list" id="bookmark-list"></div>
+      <div class="bookmark-list" id="bookmark-list"></div>    
     </div>
+
+  <!-- pomodoro -->
+
+    <div id="pomodoro">
+      <span>Pomodoro: 시간을 선택하세요</span>
+      <div id="pomodoro-display">25:00</div>
+      <div>
+        <select id="time-intervals">
+          <option value="1500">25분</option>
+          <option value="2400">40분</option>
+          <option value="3600">60분</option>
+        </select>
+      </div>
+      <button id="start-pause">start!</button>
+      <button id="reset">reset</button>
+      </br>
+      <div id='success-count'>
+        <span>0</span>
+        <span>회 성공</span>
+      </div>
+    </div>
+
     <script src="./js/clock.js"></script>
     <script src="./js/search.js"></script>
     <script src="./js/quote.js"></script>
@@ -82,5 +105,6 @@
     <script src="./js/weather.js"></script>
     <script src="./js/bookmark.js"></script>
     <script src="./js/background.js"></script>
+    <script src="./js/poromodo.js"></script>
   </body>
 </html>
