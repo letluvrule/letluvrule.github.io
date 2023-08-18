@@ -84,6 +84,15 @@ img {
   text-align: center;
   margin-top: -10px;
 }
+
+.main-wrapper #search-input {
+  background-image: url('../background-images/google_logo.png');
+  background-position: left;
+  background-size: 20%;
+  background-repeat: no-repeat;
+
+}
+
 .main-wrapper,
 .main-wrapper input #search-input::placeholder {
   color: white;
