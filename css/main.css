@@ -51,6 +51,10 @@ img {
   text-align: center;
 }
 
+#login-form input::placeholder {
+  color: white;
+}
+
 /* geolocation */
 #weather {
   margin-bottom: 20px;
