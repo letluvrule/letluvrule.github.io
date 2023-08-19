@@ -54,7 +54,7 @@
 
     <div class="bookmark-bar" id="bookmark-bar">
       <div class="bookmark-item-add-btn" id="bookmark-item-add-btn">
-        + 북마크
+        <i class="far fas fa-plus fa-lg"></i><i class="far fa-bookmark fa-lg"></i> <span>북마크</span>
       </div>
 
       <!-- bookmark list -->
@@ -81,21 +81,30 @@
 
     <div id="pomodoro">
       <span>Pomodoro : 시간을 선택하세요</span>
-      <div id="pomodoro-display">25:00</div>
+      <div id="pomodoro-display"></div>
       <div>
         <select id="time-intervals">
+          <option value="600">10분</option>
           <option value="1500">25분</option>
           <option value="2400">40분</option>
           <option value="3600">60분</option>
         </select>
       </div>
-      <button id="start-pause">start!</button>
-      <button id="reset">reset</button>
+      <button id="start-pause"><i class="fas fa-play"></i></button>
+      <button id="reset"><i class="fas fa-sync-alt fa-lg"></i></button>
       </br>
       <div id='success-count'>
-        <span>0</span>
-        <span>회 성공</span>
+        <span>0</span><span>회 성공</span>
       </div>
+      <iframe width="220" 
+      id='youtube'
+      height="120" 
+      src="https://www.youtube.com/embed/Jm5v-dZnYCs" 
+      title="YouTube video player" 
+      frameborder="0" 
+      allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+      allowfullscreen>
+      </iframe>
     </div>
 
     <script src="./js/clock.js"></script>
@@ -106,5 +115,9 @@
     <script src="./js/bookmark.js"></script>
     <script src="./js/background.js"></script>
     <script src="./js/poromodo.js"></script>
+    <script
+    src="https://kit.fontawesome.com/6478f529f2.js"
+    crossorigin="anonymous"
+  ></script>
   </body>
 </html>

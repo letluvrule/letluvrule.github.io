@@ -1,66 +1,71 @@
 const newBookmarkForm = document.getElementById('bookmark-item-input-form');
 const bookmarkItemList = document.getElementById('bookmark-list');
+const newBookmarkNameInput = document.getElementById('new-bookmark-name-input');
+const newBookmarkUrlInput = document.getElementById('new-bookmark-url-input');
+const bookmarkItemAddBtn = document.getElementById('bookmark-item-add-btn');
+const addBtn = document.getElementById('add-btn');
+const cancelBtn = document.getElementById('cancel-btn');
 
-// <--북마크 리스트 초기 설정-->
-let bookmarkList = [];
-localStorage.getItem('bookmarkList')
-  ? (bookmarkList = JSON.parse(localStorage.getItem('bookmarkList')))
-  : localStorage.setItem('bookmarkList', JSON.stringify(bookmarkList));
+let bookmarkList = getStoredBookmarkList();
 
-// <--북마크 아이템 추가 버튼 초기 설정-->
-let isAddBtnClick = false;
 newBookmarkForm.style.display = 'none';
+bookmarkItemAddBtn.addEventListener('click', newBookmarkToggle);
+addBtn.addEventListener('click', addBookmarkItem);
+cancelBtn.addEventListener('click', newBookmarkToggle);
+setBookmarkList();
 
-// <--북마크 아이템 추가 버튼 Toggle-->
-const newBookmarkToggle = () => {
-  isAddBtnClick = !isAddBtnClick;
-  isAddBtnClick
-    ? (newBookmarkForm.style.display = 'block')
-    : (newBookmarkForm.style.display = 'none');
-};
+function getStoredBookmarkList() {
+  return JSON.parse(localStorage.getItem('bookmarkList')) || [];
+}
 
-// <--북마크 아이템 삭제-->
-const deleteBookmarkItem = (id) => {
+function setStoredBookmarkList(list) {
+  localStorage.setItem('bookmarkList', JSON.stringify(list));
+}
+
+function newBookmarkToggle() {
+  newBookmarkForm.style.display =
+    newBookmarkForm.style.display === 'block' ? 'none' : 'block';
+}
+
+function deleteBookmarkItem(id) {
   const isDelete = window.confirm('정말 삭제하시겠습니까?');
-  if (isDelete) {
-    let bookmarkList = JSON.parse(localStorage.getItem('bookmarkList'));
-    let nowBookmarkList = bookmarkList.filter((elm) => elm.createAt !== id);
-    localStorage.setItem('bookmarkList', JSON.stringify(nowBookmarkList));
-    document.getElementById(`bookmark-item-${id}`).remove();
-    return;
-  }
-};
+  if (!isDelete) return;
 
-//<--북마크 아이템 나타내기-->
-const setBookmarkItem = (item) => {
+  const updatedBookmarkList = bookmarkList.filter((elm) => elm.createAt !== id);
+  setStoredBookmarkList(updatedBookmarkList);
+  document.getElementById(`bookmark-item-${id}`).remove();
+}
+
+function setBookmarkItem(item) {
   const bookmarkItem = document.createElement('div');
-  bookmarkItem.classList.add('bookmark-item');
+  bookmarkItem.className = 'bookmark-item';
   bookmarkItem.id = `bookmark-item-${item.createAt}`;
 
   const bookmarkInfo = document.createElement('div');
-  bookmarkInfo.classList.add('bookmark-info');
+  bookmarkInfo.className = 'bookmark-info';
 
   const bookmarkUrl = document.createElement('a');
-  bookmarkUrl.classList.add('bookmark-url');
+  bookmarkUrl.className = 'bookmark-url';
+  bookmarkUrl.href = item.url;
+  bookmarkUrl.target = '_blank';
 
   const urlIcon = document.createElement('div');
-  urlIcon.classList.add('url-icon');
+  urlIcon.className = 'url-icon';
 
   const urlIconImg = document.createElement('img');
+  urlIconImg.src = `https://www.google.com/s2/favicons?domain_url=${item.url}`;
 
   const nameElement = document.createElement('div');
-  nameElement.classList.add('url-name');
+  nameElement.className = 'url-name';
+  nameElement.textContent = item.name;
 
   const bookmarkDelBtn = document.createElement('div');
-  bookmarkDelBtn.classList.add('del-btn');
-  bookmarkDelBtn.textContent = '삭제';
+  bookmarkDelBtn.className = 'del-btn';
+  bookmarkDelBtn.innerHTML =
+    '<i class="fas fa-times-circle fa-lg" style="color: white;"></i>';
   bookmarkDelBtn.addEventListener('click', () => {
     deleteBookmarkItem(item.createAt);
   });
-
-  bookmarkUrl.href = item.url;
-  urlIconImg.src = `https://www.google.com/s2/favicons?domain_url=${item.url}`;
-  nameElement.textContent = item.name;
 
   bookmarkItem.appendChild(bookmarkInfo);
   bookmarkItem.appendChild(bookmarkDelBtn);
@@ -70,37 +75,27 @@ const setBookmarkItem = (item) => {
   urlIcon.appendChild(urlIconImg);
 
   bookmarkItemList.appendChild(bookmarkItem);
-};
+}
 
-// <--북마크 리스트 요소 꺼내기-->
-const setBookmarkList = () => {
+function setBookmarkList() {
   bookmarkList.forEach((item) => {
     setBookmarkItem(item);
   });
-};
+}
 
-// <--북마크 아이템 추가-->
-const addBookmarkItem = () => {
-  let bookmarkList = [];
-  if (localStorage.getItem('bookmarkList')) {
-    bookmarkList = JSON.parse(localStorage.getItem('bookmarkList'));
-  }
-  let name = document.getElementById('new-bookmark-name-input').value;
-  let url = document.getElementById('new-bookmark-url-input').value;
-  let createAt = Date.now();
-  bookmarkList.push({ name: name, url: url, createAt: createAt });
-  localStorage.setItem('bookmarkList', JSON.stringify(bookmarkList));
-  document.getElementById('new-bookmark-name-input').value = '';
-  document.getElementById('new-bookmark-url-input').value = '';
-  setBookmarkItem({ name: name, url: url, createAt: createAt });
+function addBookmarkItem() {
+  const name = newBookmarkNameInput.value;
+  const url = newBookmarkUrlInput.value;
+  const createAt = Date.now();
+
+  if (!name || !url) return;
+
+  const newBookmark = { name, url, createAt };
+  bookmarkList.push(newBookmark);
+  setStoredBookmarkList(bookmarkList);
+
+  newBookmarkNameInput.value = '';
+  newBookmarkUrlInput.value = '';
+  setBookmarkItem(newBookmark);
   newBookmarkToggle();
-};
-
-setBookmarkList();
-document
-  .getElementById('bookmark-item-add-btn')
-  .addEventListener('click', newBookmarkToggle);
-document.getElementById('add-btn').addEventListener('click', addBookmarkItem);
-document
-  .getElementById('cancel-btn')
-  .addEventListener('click', newBookmarkToggle);
+}

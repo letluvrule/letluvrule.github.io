@@ -1,9 +1,10 @@
 const searchInput = document.getElementById('search-input');
+const searchButton = document.getElementById('search-button');
 
 const showSearchResult = () => {
   let searchWord = searchInput.value;
-  window.location.href = `https://google.com/search?q=${searchWord}`;
-  searchWord = '';
+  window.open(`https://www.google.com/search?q=${searchWord}`, '_blank');
+  searchInput.value = '';
 };
 
 const enterKey = (event) => {
@@ -14,4 +15,8 @@ const enterKey = (event) => {
 
 searchInput.addEventListener('keypress', (event) => {
   enterKey(event);
+});
+
+searchButton.addEventListener('click', () => {
+  showSearchResult();
 });

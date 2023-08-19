@@ -2,12 +2,15 @@ const pomodoroDisplay = document.getElementById('pomodoro-display');
 const timeIntervalsSelect = document.getElementById('time-intervals');
 const startPauseButton = document.getElementById('start-pause');
 const resetButton = document.getElementById('reset');
-const successCountSpan = document.getElementById('success-count');
+const successCountSpan = document.querySelector(
+  '#success-count span:first-child'
+);
 
-let time = parseInt(timeIntervalsSelect.value); // Initial time in seconds
+let time = parseInt(timeIntervalsSelect.value);
 let timer;
 let isPaused = true;
 let successCount = 0;
+let currentDate = new Date();
 
 function formatTime(seconds) {
   const minutes = Math.floor(seconds / 60);
@@ -21,10 +24,10 @@ function updateDisplay() {
 
 function toggleTimer() {
   if (isPaused) {
-    startPauseButton.textContent = 'Pause';
+    startPauseButton.innerHTML = '<i class="fas fa-pause"></i>';
     timer = setInterval(updateTime, 1000);
   } else {
-    startPauseButton.textContent = 'Start!';
+    startPauseButton.innerHTML = '<i class="fas fa-play"></i>';
     clearInterval(timer);
   }
   isPaused = !isPaused;
@@ -36,7 +39,7 @@ function updateTime() {
     updateDisplay();
   } else {
     clearInterval(timer);
-    startPauseButton.textContent = 'Start!';
+    startPauseButton.innerHTML = '<i class="fas fa-play"></i>';
     isPaused = true;
     const now = new Date();
     if (now.getDate() !== currentDate.getDate()) {
@@ -53,9 +56,9 @@ function updateTime() {
 function resetTimer() {
   clearInterval(timer);
   isPaused = true;
-  time = parseInt(timeIntervalsSelect.value); // Reset time based on selected value
+  time = parseInt(timeIntervalsSelect.value);
   updateDisplay();
-  startPauseButton.textContent = 'Start!';
+  startPauseButton.innerHTML = '<i class="fas fa-play"></i>';
 }
 
 timeIntervalsSelect.addEventListener('change', () => {
@@ -68,4 +71,4 @@ timeIntervalsSelect.addEventListener('change', () => {
 startPauseButton.addEventListener('click', toggleTimer);
 resetButton.addEventListener('click', resetTimer);
 
-updateDisplay(); // Initial display update
+updateDisplay();

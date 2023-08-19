@@ -11,8 +11,9 @@ function onGeoOk(position) {
     .then((response) => response.json())
     .then((data) => {
       city.innerText = data.name;
-      weather.innerText = `${data.weather[0].main} / ${data.main.temp}도 /`;
+      weather.innerText = `날씨: ${data.weather[0].main} / 기온: ${data.main.temp}도 / 위치: `;
     });
+  weatherData();
 }
 function onGeoError() {
   alert("Can't find you. No weather for you.");

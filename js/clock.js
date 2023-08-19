@@ -17,14 +17,16 @@
       '금요일',
       '토요일',
     ];
+
+    let year = modifyNumber(nowDate.getFullYear());
     let month = modifyNumber(nowDate.getMonth() + 1);
     let date = modifyNumber(nowDate.getDate());
     let day = week[nowDate.getDay()];
-    setNowDate(month, date, day);
+    setNowDate(year, month, date, day);
   };
 
-  const setNowDate = (month, date, day) => {
-    dateElement.textContent = `${month}월 ${date}일 ${day}`;
+  const setNowDate = (year, month, date, day) => {
+    dateElement.textContent = ` ${year}년 ${month}월 ${date}일 ${day}`;
   };
 
   const getNowTime = () => {

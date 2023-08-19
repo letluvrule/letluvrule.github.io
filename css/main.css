@@ -74,7 +74,7 @@ img {
 }
 .main-wrapper #search-input,
 .main-wrapper input {
-  width: 600px;
+  width: 500px;
   background-color: rgba(0, 0, 0, 0.5);
   color: white;
   font-size: var(--medium);
@@ -90,16 +90,17 @@ img {
   background-position: left;
   background-size: 20%;
   background-repeat: no-repeat;
-
 }
 
-.main-wrapper,
-.main-wrapper input #search-input::placeholder {
+.main-wrapper {
   color: white;
   font-size: var(--medium);
 }
 
-/* 명언 */
+#search-input::placeholder {
+  color: white;
+}
+
 .quote {
   font-size: var(--small);
   position: fixed;
@@ -109,7 +110,15 @@ img {
   margin-bottom: 20px;
   font-weight: 300;
   text-align: center;
+  font-weight: 500;
+  transition: transform 0.2s ease; /* hover 시에만 transform 애니메이션 적용 */
 }
+
+.quote:hover {
+  transform: translate(0, -20px); /* 한 번만 위로 이동하도록 설정 */
+}
+
+
 
 .bookmark-bar {
   width: 240px;
@@ -130,11 +139,29 @@ img {
   cursor: pointer;
   display: flex;
   justify-content: center;
+  align-items: center;
   border-radius: 5px;
   background-color: rgba(255, 255, 255, 0.1);
   border: rgba(241, 241, 241, 0.2) 0.5px solid;
   margin-bottom: 35px;
   margin-top: 10px;
+}
+
+.bookmark-item-add-btn i {
+  margin-right: 10px;
+}
+
+@keyframes rotate360 {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.bookmark-item-add-btn i:hover {
+  animation: rotate360 1s linear infinite; 
 }
 
 .bookmark-item-add-btn:hover {
@@ -215,15 +242,20 @@ img {
 }
 
 .bookmark-list .bookmark-item:hover {
-  background-color: hotpink;
+  background-color:rgba(0, 0, 0, 0.5);
   transition: all 0.5s ease-in-out;
 }
 
 .bookmark-item .del-btn {
-  font-size: var(--xxsmall);
+  font-size: var(--xsmall);
   color: lightgray;
   vertical-align: middle;
   cursor: pointer;
+}
+
+.bookmark-item .del-btn:hover {
+  animation: rotate360 1s linear infinite;
+
 }
 
 .hidden {
@@ -253,8 +285,9 @@ img {
   height: 70px;
   background-color: rgba(0, 0, 0, 0.5);
   border-radius: 10px;
-  font-size: var(--large);
+  font-size: 40px;
   margin: 30px 0;
+  font-weight: 900;
 }
 
 #pomodoro-display span {
@@ -284,7 +317,7 @@ button#start-pause, #reset {
   font-size: 18px;
   font-weight: 700;
   border-radius: 10px;
-  margin: 30px auto;
+  margin: 20px auto;
   color: whitesmoke;
   background-color: rgba(0, 0, 0, 0.5);
   border: none;
@@ -294,4 +327,12 @@ button#start-pause:hover, #reset:hover {
   color: white;
   background-color:blueviolet;
   transition: all 0.5s ease-in-out;
+}
+
+#success-count {
+  margin-bottom: 20px;
+}
+
+#youtube {
+  border-radius: 20px;
 }
