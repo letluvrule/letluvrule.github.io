@@ -11,7 +11,9 @@ function onGeoOk(position) {
     .then((response) => response.json())
     .then((data) => {
       city.innerText = data.name;
-      weather.innerText = `날씨: ${data.weather[0].main} / 기온: ${data.main.temp}도 / 위치: `;
+      weather.innerText = `날씨 : ${data.weather[0].main}  
+      기온 : ${data.main.temp}도 
+      위치 : `;
     });
   weatherData();
 }
