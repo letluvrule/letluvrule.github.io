@@ -12,6 +12,8 @@ newBookmarkForm.style.display = 'none';
 bookmarkItemAddBtn.addEventListener('click', newBookmarkToggle);
 addBtn.addEventListener('click', addBookmarkItem);
 cancelBtn.addEventListener('click', newBookmarkToggle);
+newBookmarkNameInput.addEventListener('keydown', handleInputKeydown);
+newBookmarkUrlInput.addEventListener('keydown', handleInputKeydown);
 setBookmarkList();
 
 function getStoredBookmarkList() {
@@ -83,19 +85,34 @@ function setBookmarkList() {
   });
 }
 
-function addBookmarkItem() {
-  const name = newBookmarkNameInput.value;
-  const url = newBookmarkUrlInput.value;
+function createBookmarkItem(name, url) {
   const createAt = Date.now();
-
-  if (!name || !url) return;
-
   const newBookmark = { name, url, createAt };
   bookmarkList.push(newBookmark);
   setStoredBookmarkList(bookmarkList);
+  return newBookmark;
+}
 
+function clearInputFields() {
   newBookmarkNameInput.value = '';
   newBookmarkUrlInput.value = '';
+}
+
+function handleInputKeydown(event) {
+  if (event.key === 'Enter') {
+    event.preventDefault();
+    addBookmarkItem();
+  }
+}
+
+function addBookmarkItem() {
+  const name = newBookmarkNameInput.value.trim();
+  const url = newBookmarkUrlInput.value.trim();
+
+  if (!name || !url) return;
+
+  const newBookmark = createBookmarkItem(name, url);
   setBookmarkItem(newBookmark);
+  clearInputFields();
   newBookmarkToggle();
 }
