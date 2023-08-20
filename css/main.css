@@ -51,13 +51,23 @@ img {
   text-align: center;
 }
 
+#login-form input {
+  border: 10px solid transparent;
+  box-shadow: 0 0 20px 5px salmon; 
+  margin-bottom: 50px;
+}
+
+
 #login-form input::placeholder {
   color: white;
 }
 
 /* geolocation */
+
 #weather {
-  margin-bottom: 20px;
+  margin-top: 20px;
+  text-align: center;
+  font-size: var(--medium);
 }
 
 /* 시계 */
@@ -122,13 +132,12 @@ img {
   transform: translate(0, -20px); /* 한 번만 위로 이동하도록 설정 */
 }
 
-
-
 .bookmark-bar {
   width: 240px;
   background-color: rgba(0, 0, 0, 0.5);
   position: absolute;
-  top: 50px;
+  top: 10px;
+  bottom: 0px;
   right: 0px;
   min-height: calc(100vh - 70px);
   padding: 10px 30px;
@@ -218,6 +227,12 @@ img {
 }
 
 /* 북마크 리스트 */
+
+.bookmark-list {
+  max-height: calc(100vh - 70px); 
+  overflow-y: scroll; 
+}
+
 .bookmark-list a {
   display: flex;
   color: white;
@@ -227,6 +242,21 @@ img {
 .bookmark-list .url-icon {
   margin-right: 8px;
 }
+
+.bookmark-list::-webkit-scrollbar {
+  width: 10px; 
+}
+
+.bookmark-list::-webkit-scrollbar-thumb {
+  background-color: rgba(255, 255, 255, 0.2); 
+  border-radius: 5px; 
+}
+
+.bookmark-list::-webkit-scrollbar-track {
+  background-color: rgba(0, 0, 0, 0.5); 
+  border-radius: 5px; 
+}
+
 
 .url-icon img {
   vertical-align: middle;
@@ -239,7 +269,8 @@ img {
   font-size: var(--small);
   border-radius: 5px;
   padding: 15px;
-  margin-bottom: 20px;
+  margin-right: 10px;
+  margin-bottom: 10px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -272,8 +303,9 @@ img {
   width: 240px;
   background-color: rgba(0, 0, 0, 0.5);
   position: absolute;
-  top: 50px;
+  top: 10px;
   left: 0px;
+  bottom: 0px;
   min-height: calc(100vh - 70px);
   padding: 10px 30px;
   color: white;
@@ -290,7 +322,7 @@ img {
   background-color: rgba(0, 0, 0, 0.5);
   border-radius: 10px;
   font-size: 40px;
-  margin: 30px 0;
+  margin: 10px 0;
   font-weight: 900;
 }
 
@@ -335,6 +367,8 @@ button#start-pause:hover, #reset:hover {
 
 #success-count {
   margin-bottom: 20px;
+  font-size: 22px;
+  font-weight: 700;
 }
 
 #youtube {

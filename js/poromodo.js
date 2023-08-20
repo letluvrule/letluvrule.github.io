@@ -15,7 +15,10 @@ let currentDate = new Date();
 function formatTime(seconds) {
   const minutes = Math.floor(seconds / 60);
   const secondsRemain = seconds % 60;
-  return `${minutes}:${secondsRemain < 10 ? '0' : ''}${secondsRemain}`;
+  const formattedMinutes = minutes < 10 ? `0${minutes}` : minutes;
+  const formattedSeconds =
+    secondsRemain < 10 ? `0${secondsRemain}` : secondsRemain;
+  return `${formattedMinutes}:${formattedSeconds}`;
 }
 
 function updateDisplay() {
